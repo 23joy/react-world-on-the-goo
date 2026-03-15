@@ -1,11 +1,16 @@
+import { Suspense } from 'react'
 import './App.css'
-import Contries from './assets/components/Countries/Countries'
+import Countries from './assets/components/Countries/Countries'
 
+const contriesPromise=fetch('https://openapi.programming-hero.com/api/all')
+.then(res=>res.json())
 function App() {
 
   return (
     <> 
-    <Contries></Contries>
+    <Suspense fallback={<p>The massage is loading........</p>}>
+      <Countries contriesPromise={contriesPromise}></Countries> 
+    </Suspense>
     </>
   )
 }
